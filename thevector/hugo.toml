@@ -40,6 +40,9 @@ summaryLength = '20' # <- 20 words are approximately 160 characters
 tags = ['blog', 'responsive', 'light', 'tailwindcss']
 features = ['tailwindcss', 'two-column', 'sidebar', 'horizontal-menu']
 
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
 
 [module]
   [module.hugoVersion]
