@@ -1,6 +1,6 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+baseURL = 'https://thevector.de/'
+languageCode = 'de-DE'
+title = 'theVector'
 
 [[menus.main]]
 name = 'Home'
@@ -21,3 +21,21 @@ weight = 30
   [module.hugoVersion]
     extended = false
     min = "0.116.0"
+
+
+[related]
+  includeNewer = true
+  threshold = 60
+  toLower = false
+
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+
+  [[related.indices]]
+    name = "categories"
+    weight = 80
+
+  [[related.indices]]
+    name = "date"
+    weight = 10

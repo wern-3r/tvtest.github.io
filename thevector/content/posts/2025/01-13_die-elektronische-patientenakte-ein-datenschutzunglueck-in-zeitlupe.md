@@ -3,8 +3,8 @@ title: "Die elektronische Patientenakte: Ein Datenschutzunglück in Zeitlupe?"
 date: 2025-01-13T21:06:00+01:00
 slug: /die-elektronische-patientenakte-ein-datenschutzunglueck-in-zeitlupe/
 description: Die elektronische Patientenakte birgt enormes Potenzial für das Gesundheitswesen – und gleichzeitig gravierende Datenschutz- und Sicherheitsrisiken.
-image: images/epa-unsplash-placeholder.jpg
-caption: Symbolbild elektronische Patientenakte
+image: images/epa-ipad.jpeg
+caption: Symbolbild elektronische Patientenakte - by Google Gemini
 categories:
   - Datenschutz
 tags:

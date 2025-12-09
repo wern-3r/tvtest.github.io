@@ -3,8 +3,8 @@ title: "Die OWASP Top 10: Ein umfassender Leitfaden für Web-Sicherheitsexperten
 date: 2025-01-17T19:28:00+01:00
 slug: /die-owasp-top-10-ein-umfassender-leitfaden-fur-web-sicherheitsexperten-im-jahr-2025/
 description: Die OWASP Top 10 2021 bilden auch 2025 die zentrale Grundlage, um die kritischsten Sicherheitsrisiken moderner Webanwendungen zu verstehen und zu adressieren.
-image: images/OWASP_Top_10.png
-caption: OWASP Top 10 – Orientierungsrahmen für Web-Sicherheit
+image: images/owasp-top10.jpg
+caption: OWASP Top 10 – Orientierungsrahmen für Web-Sicherheit - by Google Gemini
 categories:
   - IT-Security
 tags:

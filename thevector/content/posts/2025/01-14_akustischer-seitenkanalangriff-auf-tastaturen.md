@@ -3,8 +3,8 @@ title: "Akustischer Seitenkanalangriff auf Tastaturen"
 date: 2025-01-14T17:10:00+01:00
 slug: /akustischer-seitenkanalangriff-auf-tastaturen/
 description: Akustische Seitenkanalangriffe auf Tastaturen ermöglichen die Rekonstruktion von Tastenanschlägen allein über Audioaufnahmen und stellen eine ernstzunehmende Bedrohung für Passwörter und andere vertrauliche Eingaben dar.
-image: images/test.png
-caption: Illustration eines akustischen Seitenkanalangriffs auf eine Tastatur
+image: images/seitenkanal-tastatur.jpg
+caption: Illustration eines akustischen Seitenkanalangriffs auf eine Tastatur - by Google Gemini
 categories:
   - IT-Security
 tags:

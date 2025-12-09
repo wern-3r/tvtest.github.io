@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>News on thevector</title>
-    <link>http://localhost:1313/tags/news/</link>
+    <link>http://localhost:42003/tags/news/</link>
     <description>Recent content in News on thevector</description>
     <generator>Hugo</generator>
-    <language>en-us</language>
-    <atom:link href="http://localhost:1313/tags/news/index.xml" rel="self" type="application/rss+xml" />
+    <language>de-DE</language>
+    <atom:link href="http://localhost:42003/tags/news/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

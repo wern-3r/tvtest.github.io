@@ -1,5 +1,5 @@
 baseURL = 'https://thevector.de/'
-languageCode = 'en-us'
+languageCode = 'de-DE'
 title = 'thevector'
 theme= "pehtheme-hugo"
 
@@ -7,7 +7,7 @@ summaryLength = '20' # <- 20 words are approximately 160 characters
 
 [params]
 	# Meta description, not exceeding 160 characters, used for the meta description within the HTML head
-	description = 'Aktuelle IT-News und Blogbeiträge rund um Datenschutz, IT-Security und Technologie – verfasst von Studierenden und IT-Security-Enthusiasten. Frische Perspektiven, fundiertes Wissen und spannende Einblicke in die digitale Welt.'
+	description = 'Aktuelle IT-News und Blogbeiträge rund um Datenschutz, IT-Security und Technologie – verfasst IT-Security-Enthusiasten. Frische Perspektiven, fundiertes Wissen und spannende Einblicke in die digitale Welt.'
 	mainSections = 'posts'
 
 [author]
@@ -26,15 +26,15 @@ summaryLength = '20' # <- 20 words are approximately 160 characters
 	[[menu.main]]
 		name = 'About'
 		pageRef = '/about'
-		weight = 15
+		weight = 25
 	[[menu.main]]
 		name = 'Tags'
 		pageRef = '/tags'
 		weight = 20
 	[[menu.main]]
-		name = 'Taxonomy'
-		pageRef = '/tags/space/'
-		weight = 25
+		name = 'News'
+		pageRef = '/tags/news'
+		weight = 15
 
 # Taxonomy terms
 tags = ['blog', 'responsive', 'light', 'tailwindcss']
