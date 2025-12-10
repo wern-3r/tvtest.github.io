@@ -9,17 +9,17 @@
     <lastBuildDate>Wed, 10 Dec 2025 17:15:00 +0100</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Analysis</title>
-      <link>http://localhost:1313/tags/analysis/</link>
+      <title>IT-Security</title>
+      <link>http://localhost:1313/tags/it-security/</link>
       <pubDate>Wed, 10 Dec 2025 17:15:00 +0100</pubDate>
-      <guid>http://localhost:1313/tags/analysis/</guid>
+      <guid>http://localhost:1313/tags/it-security/</guid>
       <description></description>
     </item>
     <item>
-      <title>It-News</title>
-      <link>http://localhost:1313/tags/it-news/</link>
+      <title>News</title>
+      <link>http://localhost:1313/tags/news/</link>
       <pubDate>Wed, 10 Dec 2025 17:15:00 +0100</pubDate>
-      <guid>http://localhost:1313/tags/it-news/</guid>
+      <guid>http://localhost:1313/tags/news/</guid>
       <description></description>
     </item>
     <item>
@@ -27,13 +27,6 @@
       <link>http://localhost:1313/tags/open-source/</link>
       <pubDate>Wed, 10 Dec 2025 17:15:00 +0100</pubDate>
       <guid>http://localhost:1313/tags/open-source/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Security</title>
-      <link>http://localhost:1313/tags/security/</link>
-      <pubDate>Wed, 10 Dec 2025 17:15:00 +0100</pubDate>
-      <guid>http://localhost:1313/tags/security/</guid>
       <description></description>
     </item>
     <item>
@@ -69,13 +62,6 @@
       <link>http://localhost:1313/tags/honeypots/</link>
       <pubDate>Thu, 12 Jun 2025 15:36:00 +0200</pubDate>
       <guid>http://localhost:1313/tags/honeypots/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>IT-Security</title>
-      <link>http://localhost:1313/tags/it-security/</link>
-      <pubDate>Thu, 12 Jun 2025 15:36:00 +0200</pubDate>
-      <guid>http://localhost:1313/tags/it-security/</guid>
       <description></description>
     </item>
     <item>
@@ -132,13 +118,6 @@
       <link>http://localhost:1313/tags/europa/</link>
       <pubDate>Thu, 16 Jan 2025 07:45:49 +0700</pubDate>
       <guid>http://localhost:1313/tags/europa/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>News</title>
-      <link>http://localhost:1313/tags/news/</link>
-      <pubDate>Thu, 16 Jan 2025 07:45:49 +0700</pubDate>
-      <guid>http://localhost:1313/tags/news/</guid>
       <description></description>
     </item>
     <item>

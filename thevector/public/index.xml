@@ -6,8 +6,15 @@
     <description>Recent content on thevector</description>
     <generator>Hugo</generator>
     <language>de-DE</language>
-    <lastBuildDate>Wed, 10 Dec 2025 17:15:00 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 10 Dec 2025 21:06:00 +0100</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Passwortmanager-Test: BSI und Verbraucherschützer sehen Mängel</title>
+      <link>http://localhost:1313/posts/2025/bsi-passwortmanager-mit-maengel/</link>
+      <pubDate>Wed, 10 Dec 2025 21:06:00 +0100</pubDate>
+      <guid>http://localhost:1313/posts/2025/bsi-passwortmanager-mit-maengel/</guid>
+      <description>&lt;h3 id=&#34;passwortmanager-test-bsi-und-verbraucherschützer-sehen-mängel&#34;&gt;Passwortmanager-Test: BSI und Verbraucherschützer sehen Mängel&lt;/h3&gt;&#xA;&lt;p&gt;Eine gemeinsame Untersuchung von BSI und Verbraucherzentrale NRW bescheinigt Passwortmanagern grundsätzlich einen hohen Nutzen, deckt aber Mängel bei Verschlüsselung und Datenschutz auf. Open-Source-Lösungen punkten bei der Datensparsamkeit.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Ein Blick hinter die Kulissen – Was thevector antreibt</title>
       <link>http://localhost:1313/posts/about/</link>
