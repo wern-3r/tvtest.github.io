@@ -1,6 +1,6 @@
 .hugo_build.lock
-thevector/public
-public/
-resources/
-.idea/
-.vscode/
+thevector/public/*
+public/*
+resources/*
+.idea/*
+.vscode/*
