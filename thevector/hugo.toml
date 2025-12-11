@@ -19,15 +19,15 @@ enableRobotsTXT = true
   mainSections = ['posts']
 
   # Brand / SEO-Basics
-  siteName      = 'thevector'
+  siteName      = 'the Vector'
   siteTagline   = 'IT-Security, Datenschutz & Technologie-News'
   keywords      = ['IT-Security','Datenschutz','Cybersecurity','KI','Cloud','Softwareentwicklung','Tech','Technologie','professionelle IT','Hacking','AI Act','Security News','IT-News']
   locale        = 'de_DE'
-  author        = 'thevector Redaktion'
+  author        = 'Redaktion'
   image         = '/images/og/default.png'  # Standard-OG-Bild
 
   # News-spezifische Parameter, die du in JSON-LD / Meta-Templates nutzen kannst
-  organizationName = 'thevector'
+  organizationName = 'the Vector'
   organizationLogo = '/images/og/default.png'
   newsSectionName  = 'News'
 
@@ -109,3 +109,9 @@ features = ['tailwindcss','two-column','sidebar','horizontal-menu']
   [[related.indices]]
     name   = 'date'
     weight = 10
+
+[outputs]
+  home = ['html', 'rss']
+  section = ['html', 'rss']
+  taxonomy = ['html']
+  term = ['html']

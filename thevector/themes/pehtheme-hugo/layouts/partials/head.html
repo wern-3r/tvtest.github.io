@@ -17,4 +17,7 @@ html {
 <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Params.Description }}{{ end }}">
 {{- partialCached "head/css.html" . -}}
 {{- partialCached "head/favicon.html" . -}}
+{{ with .OutputFormats.Get "rss" }}
+  {{ printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}
+{{ end }}
 {{- /* template "_internal/google_analytics.html" . */ -}}
