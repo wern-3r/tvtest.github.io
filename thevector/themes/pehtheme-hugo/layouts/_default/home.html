@@ -110,7 +110,7 @@
 
 <!-- Start recent post  -->
 
-  <section class="mb-16">
+  <section id="neuste" class="mb-16">
 
     <div class="flex items-center mb-6">
 
@@ -133,13 +133,14 @@
     <!-- Paginate here -->
 
     <div class="flex items-center mt-10">
-      {{- if $paginator.HasPrev -}}
-        <a class="border rounded-full px-6 py-2 hover:bg-zinc-200 mr-auto" href="{{ $paginator.Prev.URL }}">← Zurück</a>
-      {{- end -}}
+        {{- if .Paginator.HasPrev -}}
+          <a class="border rounded-full px-6 py-2 hover:bg-zinc-200 mr-auto" href="{{ .Paginator.Prev.URL | relURL }}#neuste">← Previous</a>
+        {{- end -}}
 
-      {{- if $paginator.HasNext -}}
-        <a class="border rounded-full px-6 py-2 hover:bg-zinc-200" href="{{ $paginator.Next.URL }}">Weiter →</a>
-      {{- end -}}
+        {{- if .Paginator.HasNext -}}
+          <a class="border rounded-full px-6 py-2 hover:bg-zinc-200" href="{{ .Paginator.Next.URL | relURL }}#neuste">Next →</a>
+        {{- end -}}
+
     </div>
 
   </section>
