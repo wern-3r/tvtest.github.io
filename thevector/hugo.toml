@@ -15,13 +15,13 @@ summaryLength = '20' # <- 20 words are approximately 160 characters
 
     [params.authors.pius]
       name   = "Pius Werner"
-      bio    = "IT-Security Enthusiast"
+      bio    = "Mit einem Hintergrund in der IT-Sicherheit und einer Leidenschaft für Open-Source, schreibt Pius Werner über aktuelle Themen aus Datenschutz, IT-Sicherheit und digital Politik"
       avatar = "/images/author/pius.jpg"
 
     [params.authors.arne]
       name   = "Arne Bauer"
-      bio    = "IT-Security Enthusiast"
-      # avatar = "/images/author/arne.jpg"
+      bio    = "Arne Bauer ist freiberuflicher IT-Journalist. Mit Schwerpunkt auf Cybersecurity, KI und Cloud-Themen berichtet er über aktuelle Technologien, Trends und Entwicklungen der professionellen IT."
+      avatar = "/images/author/arne.jpg"
 
 [pagination]
 	pagerSize = 6
