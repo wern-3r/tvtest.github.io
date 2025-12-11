@@ -1,56 +1,84 @@
-baseURL = 'https://thevector.de/'
+baseURL     = 'https://thevector.de/'
 languageCode = 'de-DE'
-title = 'thevector'
-theme= "pehtheme-hugo"
+title       = 'theVector – IT-Security, Datenschutz & Tech-News'
+theme       = 'pehtheme-hugo'
 
-summaryLength = '20' # <- 20 words are approximately 160 characters
+# ~20 Wörter ≈ 150–160 Zeichen für SERP-Snippets
+summaryLength = 25
+
+# Wichtige Default-Metadaten für SEO
+enableRobotsTXT = true
+
+# Für Google News & News-Sitemap (in Templates nutzen)
+[permalinks]
+  posts = '/:year/:month/:slug/'
 
 [params]
-	# Meta description, not exceeding 160 characters, used for the meta description within the HTML head
-	description = 'Aktuelle IT-News und Blogbeiträge rund um Datenschutz, IT-Security und Technologie – verfasst von IT-Security-Enthusiasten. Frische Perspektiven, fundiertes Wissen und spannende Einblicke in die digitale Welt.'
-	mainSections = 'posts'
+  # Max. ~160 Zeichen, Fokus-Keywords vorne
+  description = 'IT-Security, Datenschutz und Technologie-News: Analysen, Hintergründe und Einschätzungen zu Cybersecurity, KI, ePA, OWASP und moderner Softwareentwicklung.'
+  mainSections = ['posts']
 
+  # Brand / SEO-Basics
+  siteName      = 'thevector'
+  siteTagline   = 'IT-Security, Datenschutz & Technologie-News'
+  keywords      = ['IT-Security','Datenschutz','Cybersecurity','KI','Cloud','Softwareentwicklung','Tech','Technologie','professionelle IT','Hacking','AI Act','Security News','IT-News']
+  locale        = 'de_DE'
+  author        = 'thevector Redaktion'
+  image         = '/images/og/default.png'  # Standard-OG-Bild
+
+  # News-spezifische Parameter, die du in JSON-LD / Meta-Templates nutzen kannst
+  organizationName = 'thevector'
+  organizationLogo = '/images/og/default.png'
+  newsSectionName  = 'News'
+
+  # Google News: Kategorien als Rubriken
+  newsGenres = ['IT-Security','Datenschutz','Technologie','Politik & Regulierung']
+
+  # Strukturierte Daten (werden in Templates ausgewertet)
+  enableStructuredData = true
+  enableOpenGraph      = true
+  enableTwitterCards   = true
 
   [params.authors]
 
     [params.authors.pius]
-      name   = "Pius Werner"
-      bio    = "Mit einem Hintergrund in der IT-Sicherheit und einer Leidenschaft für Open-Source, schreibt Pius Werner über aktuelle Themen aus Datenschutz, IT-Sicherheit und digital Politik"
-      avatar = "/images/author/pius.jpg"
+      name   = 'Pius Werner'
+      bio    = 'IT-Security-Experte mit Fokus auf Datenschutz, Open-Source und digitale Politik. Schreibt über Cybersecurity, Regulierung und moderne Softwareentwicklung.'
+      avatar = '/images/author/pius.jpg'
 
     [params.authors.arne]
-      name   = "Arne Bauer"
-      bio    = "Arne Bauer ist freiberuflicher IT-Journalist. Mit Schwerpunkt auf Cybersecurity, KI und Cloud-Themen berichtet er über aktuelle Technologien, Trends und Entwicklungen der professionellen IT."
-      avatar = "/images/author/arne.jpg"
+      name   = 'Arne Bauer'
+      bio    = 'Freiberuflicher IT-Journalist mit Schwerpunkt Cybersecurity, KI und Cloud. Analysiert Trends, Angriffe und Technologien in der professionellen IT.'
+      avatar = '/images/author/arne.jpg'
 
 [pagination]
-	pagerSize = 6
+  pagerSize = 6
 
-[menu] # Menu management
-	[[menu.main]]
-		name = 'Home'
-		pageRef = '/'
-		weight = 10
-	[[menu.main]]
-		name = 'News'
-		pageRef = '/tags/News/'
-		weight = 15
-	[[menu.main]]
-		name = 'Datenschutz'
-		pageRef = '/tags/Datenschutz/'
-		weight = 20
-	[[menu.main]]
-		name = 'IT-Security'
-		pageRef = '/tags/IT-Security/'
-		weight = 25
-	[[menu.main]]
-		name = 'Über uns'
-		pageRef = '/posts/about'
-		weight = 30
+[menu]
+  [[menu.main]]
+    name    = 'Home'
+    pageRef = '/'
+    weight  = 10
+  [[menu.main]]
+    name    = 'News'
+    pageRef = '/categories/News/'
+    weight  = 15
+  [[menu.main]]
+    name    = 'Datenschutz'
+    pageRef = '/categories/Datenschutz/'
+    weight  = 20
+  [[menu.main]]
+    name    = 'IT-Security'
+    pageRef = '/categories/IT-Security/'
+    weight  = 25
+  [[menu.main]]
+    name    = 'Themen'
+    pageRef = '/tags'
+    weight  = 30
 
-# Taxonomy terms
-tags = ['blog', 'responsive', 'light', 'tailwindcss']
-features = ['tailwindcss', 'two-column', 'sidebar', 'horizontal-menu']
+# Taxonomien – für interne Verlinkung/Related Content
+tags     = ['IT-Security','Datenschutz','Cybersecurity','KI','Cloud','Softwareentwicklung','OWASP','Canarytokens','ePA','AI Act']
+features = ['tailwindcss','two-column','sidebar','horizontal-menu']
 
 [caches]
   [caches.images]
@@ -59,24 +87,25 @@ features = ['tailwindcss', 'two-column', 'sidebar', 'horizontal-menu']
 [module]
   [module.hugoVersion]
     extended = false
-    min = "0.116.0"
-  [module.mounts] # Directing the static folder to assets.
-  	source = 'assets'
-  	target = 'static'
+    min = '0.116.0'
+
+  [module.mounts]
+    source = 'assets'
+    target = 'static'
 
 [related]
   includeNewer = true
-  threshold = 60
-  toLower = false
+  threshold    = 60
+  toLower      = false
 
   [[related.indices]]
-    name = "tags"
+    name   = 'tags'
     weight = 100
 
   [[related.indices]]
-    name = "categories"
+    name   = 'categories'
     weight = 80
 
   [[related.indices]]
-    name = "date"
+    name   = 'date'
     weight = 10
