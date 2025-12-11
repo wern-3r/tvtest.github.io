@@ -4,7 +4,7 @@ date: '2025-12-11T18:26:57+01:00'
 slug: /veeam-kauft-securiti-ai/
 description: Der Backup-Spezialist Veeam erweitert sein Portfolio massiv im Bereich KI-Sicherheit und Governance. Mit der nun abgeschlossenen Übernahme von Securiti AI will das Unternehmen eine umfassende Plattform für Data Resilience und Data Security Posture Management etablieren.
 image: images/posts/veeam.png
-caption: Veeam Logo
+caption: Veeam Logo - Photo by Veeam
 
 categories:
   - News
