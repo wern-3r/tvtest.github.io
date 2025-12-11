@@ -1,9 +1,9 @@
 {{ define "main" }}
 
 <!-- Feature post by tag = "feature" -->
-<div class="">
+<div class="mt-3">
 {{- range where .Site.RegularPages "Params.tags" "intersect" (slice "feature" ) | first 1 -}}
-<section class="block md:flex relative group p-6  space-y-6 md:space-x-6 my-14 bg-zinc-100 rounded-lg hover:bg-blue-100">
+<section class="block md:flex relative group p-6  space-y-6 md:space-x-6 mb-14 bg-zinc-100 rounded-lg hover:bg-blue-100">
   <figure class="basis-1/2 w-full aspect-video overflow-hidden rounded-lg border">
 
     {{- if .Params.image }}
