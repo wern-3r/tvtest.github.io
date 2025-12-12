@@ -17,15 +17,15 @@ draft: false
 author: Berkay
 ---
 
-Ein weiterer Hackerangriff, ein weiteres Unternehmen, das mit den Folgen eines Datenlecks kämpft – solche Meldungen sind längst Alltag. Die OWASP Top 10 bieten hier einen etablierten Rahmen, um die gravierendsten Schwachstellen in Webanwendungen zu verstehen und systematisch zu reduzieren.[web:65][web:69]
+Ein weiterer Hackerangriff, ein weiteres Unternehmen, das mit den Folgen eines Datenlecks kämpft – solche Meldungen sind längst Alltag. Die OWASP Top 10 bieten hier einen etablierten Rahmen, um die gravierendsten Schwachstellen in Webanwendungen zu verstehen und systematisch zu reduzieren.
 
 ## OWASP in Kürze
 
-Das Open Worldwide Application Security Project (OWASP) ist eine gemeinnützige Organisation, die weltweit an der Verbesserung der Softwaresicherheit arbeitet.[web:61][web:64] Die Community entwickelt frei verfügbare Ressourcen wie Dokumentationen, Tools und Standards und stellt mit der OWASP Top 10 einen De-facto-Referenzstandard für Web-Sicherheitsrisiken bereit.[web:65][web:67]
+Das Open Worldwide Application Security Project (OWASP) ist eine gemeinnützige Organisation, die weltweit an der Verbesserung der Softwaresicherheit arbeitet. Die Community entwickelt frei verfügbare Ressourcen wie Dokumentationen, Tools und Standards und stellt mit der OWASP Top 10 einen De-facto-Referenzstandard für Web-Sicherheitsrisiken bereit.
 
 ## Die OWASP Top 10 2021
 
-Die OWASP Top 10 2021 definieren zehn zentrale Risikokategorien, die auch 2025 weiterhin hohe Praxisrelevanz besitzen:[web:56][web:62]
+Die OWASP Top 10 2021 definieren zehn zentrale Risikokategorien, die auch 2025 weiterhin hohe Praxisrelevanz besitzen:
 
 - A01:2021 – Broken Access Control  
 - A02:2021 – Cryptographic Failures  
@@ -38,20 +38,20 @@ Die OWASP Top 10 2021 definieren zehn zentrale Risikokategorien, die auch 2025 w
 - A09:2021 – Security Logging and Monitoring Failures  
 - A10:2021 – Server-Side Request Forgery (SSRF)  
 
-Viele dieser Kategorien bündeln frühere Einträge und spiegeln typische Fehlerbilder in realen Anwendungen wider, etwa fehlerhafte Rechteprüfung, unsichere Krypto-Konfigurationen oder veraltete Komponenten.[web:59][web:63]
+Viele dieser Kategorien bündeln frühere Einträge und spiegeln typische Fehlerbilder in realen Anwendungen wider, etwa fehlerhafte Rechteprüfung, unsichere Krypto-Konfigurationen oder veraltete Komponenten.
 
 ## Entstehung der Liste
 
-Die Liste entsteht aus einer Kombination von Datenauswertung und Experteneinschätzungen. Für die 2021er-Version wurden Schwachstellendaten zahlreicher Unternehmen und Dienstleister auf CWE-Ebene gesammelt, normalisiert und zu Risikokategorien aggregiert.[web:62][web:65] Ergänzend fließen Community-Umfragen ein, um Themen zu berücksichtigen, die in Daten noch unterrepräsentiert, aber aus Sicht von Praktikern sicherheitsrelevant sind.[web:62][web:71][web:74]
+Die Liste entsteht aus einer Kombination von Datenauswertung und Experteneinschätzungen. Für die 2021er-Version wurden Schwachstellendaten zahlreicher Unternehmen und Dienstleister auf CWE-Ebene gesammelt, normalisiert und zu Risikokategorien aggregiert. Ergänzend fließen Community-Umfragen ein, um Themen zu berücksichtigen, die in Daten noch unterrepräsentiert, aber aus Sicht von Praktikern sicherheitsrelevant sind.
 
 ## Stärken und Grenzen
 
-Die OWASP Top 10 sind international anerkannt und werden in Entwicklungsrichtlinien, Audits und Schulungen breit genutzt, was zu einem gemeinsamen Vokabular und Fokus in der AppSec-Praxis führt.[web:65][web:72] Gleichzeitig bildet die Liste naturgemäß nur einen Ausschnitt der Bedrohungslandschaft ab und kann insbesondere komplexe Architekturrisiken oder neuartige Angriffsmuster nicht vollständig erfassen.[web:59][web:63]
+Die OWASP Top 10 sind international anerkannt und werden in Entwicklungsrichtlinien, Audits und Schulungen breit genutzt, was zu einem gemeinsamen Vokabular und Fokus in der AppSec-Praxis führt. Gleichzeitig bildet die Liste naturgemäß nur einen Ausschnitt der Bedrohungslandschaft ab und kann insbesondere komplexe Architekturrisiken oder neuartige Angriffsmuster nicht vollständig erfassen.
 
 ## Blick Richtung 2025
 
-Mit dem Release Candidate der OWASP Top 10:2025 verschieben sich Schwerpunkte hin zu Themen wie API-Sicherheit, Cloud-nativen Architekturen und Lieferkettenrisiken.[web:56][web:68][web:72] Für Teams bedeutet das, bestehende Secure-Development-Prozesse um Aspekte wie API-Hardening, Dependency-Management und Monitoring verteilter Systeme zu erweitern, statt sich allein auf klassische Web-OWASP-Risiken zu konzentrieren.[web:65][web:71]
+Mit dem Release Candidate der OWASP Top 10:2025 verschieben sich Schwerpunkte hin zu Themen wie API-Sicherheit, Cloud-nativen Architekturen und Lieferkettenrisiken. Für Teams bedeutet das, bestehende Secure-Development-Prozesse um Aspekte wie API-Hardening, Dependency-Management und Monitoring verteilter Systeme zu erweitern, statt sich allein auf klassische Web-OWASP-Risiken zu konzentrieren.
 
 ## Fazit
 
-Die OWASP Top 10 sind kein vollständiger Katalog aller Risiken, sondern ein Kompass, der hilft, die kritischsten Schwachstellen priorisiert zu adressieren. Richtig eingesetzt bilden sie die Basis für Threat-Modeling, Security-Testing-Strategien und Schulungskonzepte, bleiben aber eingebettet in ein umfassenderes Sicherheitsprogramm, das über die zehn Kategorien hinausgeht.[web:65][web:69]
+Die OWASP Top 10 sind kein vollständiger Katalog aller Risiken, sondern ein Kompass, der hilft, die kritischsten Schwachstellen priorisiert zu adressieren. Richtig eingesetzt bilden sie die Basis für Threat-Modeling, Security-Testing-Strategien und Schulungskonzepte, bleiben aber eingebettet in ein umfassenderes Sicherheitsprogramm, das über die zehn Kategorien hinausgeht.
