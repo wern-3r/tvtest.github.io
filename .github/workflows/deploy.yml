@@ -38,7 +38,7 @@ jobs:
           echo "Checking for unpublished articles in main branch..."
           draft_count=0
           
-          for file in content/blog/*.md content/posts/*.md; do
+          for file in ./thevector/content/**/**/*.md; do
             if [ -f "$file" ]; then
               if grep -q "^draft: true" "$file"; then
                 echo "Found draft article: $file"
@@ -70,14 +70,17 @@ jobs:
           extended: true
 
       - name: Build site (with drafts for preview)
+        working-directory: ./thevector
         if: github.event_name == 'pull_request'
         run: hugo --buildDrafts --environment draft
 
       - name: Build site (production - no drafts)
+        working-directory: ./thevector
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: hugo --environment production
 
       - name: Build site (development)
+        working-directory: ./thevector
         if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
         run: hugo --buildDrafts --environment develop
 
