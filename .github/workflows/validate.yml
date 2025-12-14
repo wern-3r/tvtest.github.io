@@ -1,0 +1,234 @@
+name: PR Validation & Review
+
+on:
+  pull_request:
+    paths:
+      - 'thevector/content/**/*.md'
+      - '.spellcheck.yml'
+      - '.wordlist.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+  checks: read
+
+jobs:
+  # Job 1: Spellcheck
+  spellcheck:
+    runs-on: ubuntu-latest
+    name: Spell & Grammar Check
+    continue-on-error: false
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run spell check
+        id: spell_check
+        uses: rojopolis/spellcheck-github-actions@0.23.0
+        with:
+          config_path: .spellcheck.yml
+          task_name: Markdown
+        continue-on-error: true
+
+      - name: Comment PR if spell check failed
+        if: failure() || steps.spell_check.outcome == 'failure'
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            ❌ **Spell Check Failed**
+            
+            Please fix the spelling errors detected above. You can view the detailed report in the workflow run.
+          comment_tag: spellcheck-result
+
+      - name: Comment PR if spell check passed
+        if: success()
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            ✅ **Spell Check Passed**
+            
+            No spelling or grammar errors detected.
+          comment_tag: spellcheck-result
+          reactions: 'rocket'
+
+  # Job 2: Content Validation
+  content-validation:
+    runs-on: ubuntu-latest
+    name: Content Validation
+    continue-on-error: false
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check for required frontmatter
+        id: frontmatter_check
+        run: |
+          #!/bin/bash
+          errors=0
+          required_fields=("title" "date" "description")
+          
+          for file in content/blog/*.md content/posts/*.md; do
+            if [ -f "$file" ]; then
+              for field in "${required_fields[@]}"; do
+                if ! grep -q "^${field}:" "$file"; then
+                  echo "❌ $file: Missing '${field}' in frontmatter"
+                  errors=$((errors + 1))
+                fi
+              done
+            fi
+          done
+          
+          if [ $errors -gt 0 ]; then
+            echo "validation_failed=true" >> $GITHUB_OUTPUT
+            echo "error_count=$errors" >> $GITHUB_OUTPUT
+            exit 1
+          else
+            echo "validation_failed=false" >> $GITHUB_OUTPUT
+          fi
+        continue-on-error: true
+
+      - name: Check for draft status
+        id: draft_check
+        run: |
+          #!/bin/bash
+          for file in content/blog/*.md content/posts/*.md; do
+            if [ -f "$file" ]; then
+              if ! grep -q "^draft:" "$file"; then
+                echo "⚠️ $file: Missing 'draft' field - assuming draft: true"
+              elif grep -q "^draft: false" "$file"; then
+                echo "🚨 $file: Found 'draft: false' - should be 'draft: true' for review"
+              fi
+            fi
+          done
+
+      - name: Comment PR with validation results
+        if: steps.frontmatter_check.outcome == 'failure'
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            ❌ **Content Validation Failed**
+            
+            Found ${{ steps.frontmatter_check.outputs.error_count }} validation errors:
+            - Missing required frontmatter fields (title, date, description)
+            
+            **Please ensure all articles have:**
+            ```yaml
+            ---
+            title: "Article Title"
+            date: YYYY-MM-DD
+            description: "Brief description"
+            draft: true
+            tags: ["tag1", "tag2"]
+            ---
+            ```
+          comment_tag: content-validation
+
+      - name: Comment PR with validation success
+        if: success()
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            ✅ **Content Validation Passed**
+            
+            All required frontmatter fields are present.
+          comment_tag: content-validation
+          reactions: 'thumbsup'
+
+  # Job 3: Hugo Build Test
+  build-test:
+    runs-on: ubuntu-latest
+    name: Build Test
+    needs: [spellcheck, content-validation]
+    continue-on-error: false
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.128.0'
+          extended: true
+
+      - name: Build site for preview (with drafts)
+        id: hugo_build
+        run: hugo --buildDrafts --environment draft
+        continue-on-error: true
+
+      - name: Comment PR if build failed
+        if: failure()
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            ❌ **Hugo Build Failed**
+            
+            The site failed to build with these changes. Check the workflow logs for details.
+          comment_tag: build-result
+
+      - name: Comment PR if build passed
+        if: success()
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            ✅ **Hugo Build Successful**
+            
+            The site builds correctly with these changes.
+          comment_tag: build-result
+          reactions: 'rocket'
+
+      - name: Upload build artifacts
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: hugo-build-preview
+          path: public/
+          retention-days: 7
+
+  # Job 4: Summary Report
+  review-summary:
+    runs-on: ubuntu-latest
+    name: Review Status Summary
+    needs: [spellcheck, content-validation, build-test]
+    if: always()
+    
+    steps:
+      - name: Determine overall status
+        id: overall_status
+        run: |
+          if [ "${{ needs.spellcheck.result }}" == "failure" ] || \
+             [ "${{ needs.content-validation.result }}" == "failure" ] || \
+             [ "${{ needs.build-test.result }}" == "failure" ]; then
+            echo "status=failed" >> $GITHUB_OUTPUT
+            echo "emoji=❌" >> $GITHUB_OUTPUT
+          else
+            echo "status=passed" >> $GITHUB_OUTPUT
+            echo "emoji=✅" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Post final review status
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            ## ${{ steps.overall_status.outputs.emoji }} Review Status
+            
+            | Check | Status |
+            |-------|--------|
+            | Spell Check | ${{ needs.spellcheck.result == 'success' && '✅ PASSED' || '❌ FAILED' }} |
+            | Content Validation | ${{ needs.content-validation.result == 'success' && '✅ PASSED' || '❌ FAILED' }} |
+            | Hugo Build | ${{ needs.build-test.result == 'success' && '✅ PASSED' || '❌ FAILED' }} |
+            
+            **Next Steps:**
+            - Fix any failing checks above
+            - Request a review from maintainers
+            - Once approved and all checks pass, merge to `main` to publish
+          comment_tag: review-summary
+          reactions: 'eyes'

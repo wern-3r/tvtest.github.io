@@ -24,5 +24,4 @@ matrix:
             - 'pre'
             - 'blockquote'
     sources:
-      - 'content/blog/**/*.md'
-      - 'content/posts/**/*.md'
+      - 'thevector/content/posts/**/*.md'
