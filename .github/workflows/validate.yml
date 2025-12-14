@@ -3,9 +3,7 @@ name: PR Validation & Review
 on:
   pull_request:
     paths:
-      - './thevector/content/**/*.md'
-      - '.spellcheck.yml'
-      - '.wordlist.txt'
+      - './thevector/content/**/**/*.md'
   workflow_dispatch:
 
 permissions:

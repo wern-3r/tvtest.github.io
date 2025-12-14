@@ -8,7 +8,7 @@ caption: Paul-Henri Spaak Gebäude in Brüssel - Photo by Guillaume Périgois
 categories:
   - News
 tags:
-  - feature
+  - featuree
   - EU
   - Chip
   - Staatshilfen
