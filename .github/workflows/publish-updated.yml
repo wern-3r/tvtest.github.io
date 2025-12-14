@@ -1,0 +1,106 @@
+name: Build & Deploy Hugo
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validate Changes
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Check for unpublished articles
+        id: draft_check
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          #!/bin/bash
+          echo "Checking for unpublished articles in main branch..."
+          draft_count=0
+          
+          for file in content/blog/*.md content/posts/*.md 2>/dev/null; do
+            if [ -f "$file" ]; then
+              if grep -q "^draft: true" "$file"; then
+                echo "Found draft article: $file"
+                draft_count=$((draft_count + 1))
+              fi
+            fi
+          done
+          
+          echo "draft_count=$draft_count" >> $GITHUB_OUTPUT
+          if [ $draft_count -gt 0 ]; then
+            echo "⚠️ Found $draft_count draft articles in main branch"
+          fi
+        continue-on-error: true
+
+  build:
+    runs-on: ubuntu-latest
+    name: Build Hugo Site
+    needs: validate
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.128.0'
+          extended: true
+
+      - name: Build site (with drafts for preview)
+        if: github.event_name == 'pull_request'
+        run: hugo --buildDrafts --environment draft
+
+      - name: Build site (production - no drafts)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: hugo --environment production
+
+      - name: Build site (development)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+        run: hugo --buildDrafts --environment develop
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Deployment notification
+        run: |
+          echo "✅ Site deployed to GitHub Pages"
+          echo "🎉 Published at: ${{ steps.deployment.outputs.page_url }}"
