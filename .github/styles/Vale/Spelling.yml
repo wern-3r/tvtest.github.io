@@ -1,0 +1,8 @@
+---
+name: Spelling
+description: Prüft auf häufige Rechtschreibfehler
+scope: text
+level: error
+regex: |
+  (?i)\b(teh|recieve|occured|untill|wich|thier|seperator|privat|feler|disen)\b
+message: "Möglicher Rechtschreibfehler: '{{ .Match }}'"
