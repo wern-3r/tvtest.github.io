@@ -9,10 +9,9 @@ on:
 permissions:
   contents: read
   pull-requests: write
-  checks: read
+  checks: write
 
 jobs:
-  # Zuerst checken, ob relevante Dateien geändert wurden
   check-files:
     runs-on: ubuntu-latest
     outputs:
@@ -30,30 +29,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: check-files
     if: needs.check-files.outputs.markdown == 'true' || github.event_name == 'workflow_dispatch'
-    name: Spell & Grammar Check
+    name: German Spell & Grammar Check
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
-      - name: Run spell check
-        id: spell_check
-        uses: rojopolis/spellcheck-github-actions@0.23.0
+      - name: LanguageTool check
+        uses: reviewdog/action-languagetool@ea19c757470ce0dbfcbc34aec090317cef1ff0b5
         with:
-          config_path: .spellcheck.yml
-          task_name: Markdown
-        continue-on-error: true
-
-      - name: Comment PR with result
-        if: always()
-        uses: thollander/actions-comment-pull-request@v2
-        with:
-          message: |
-            ${{ steps.spell_check.outcome == 'success' && '✅ **Spell Check Passed** - No spelling or grammar errors detected.' || '❌ **Spell Check Failed** - Please fix the spelling errors detected above.' }}
-          comment_tag: spellcheck-result
-          reactions: ${{ steps.spell_check.outcome == 'success' && 'rocket' || '' }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          language: de-DE
+          reporter: github-pr-review
 
   content-validation:
     runs-on: ubuntu-latest
@@ -62,107 +49,16 @@ jobs:
     name: Content Validation
     
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Check for required frontmatter
-        id: frontmatter_check
+      - uses: actions/checkout@v4
+      - name: Check frontmatter
         run: |
-          #!/bin/bash
-          errors=0
-          required_fields=("title" "date" "description")
-          
-          for file in $(find thevector/content -name "*.md" -type f); do
-            for field in "${required_fields[@]}"; do
-              if ! grep -q "^${field}:" "$file"; then
-                echo "❌ $file: Missing '${field}' in frontmatter"
-                errors=$((errors + 1))
-              fi
-            done
+          for file in thevector/content/**/*.md; do
+            if [ -f "$file" ]; then
+              for field in title date description; do
+                if ! grep -q "^${field}:" "$file"; then
+                  echo "❌ $file: Missing '$field'"
+                  exit 1
+                fi
+              done
+            fi
           done
-          
-          if [ $errors -gt 0 ]; then
-            echo "validation_failed=true" >> $GITHUB_OUTPUT
-            echo "error_count=$errors" >> $GITHUB_OUTPUT
-            exit 1
-          else
-            echo "validation_failed=false" >> $GITHUB_OUTPUT
-          fi
-        continue-on-error: true
-
-      - name: Comment PR with result
-        if: always()
-        uses: thollander/actions-comment-pull-request@v2
-        with:
-          message: |
-            ${{ steps.frontmatter_check.outcome == 'success' && '✅ **Content Validation Passed** - All required frontmatter fields are present.' || format('❌ **Content Validation Failed**\n\nFound {0} validation errors:\n- Missing required frontmatter fields (title, date, description)\n\n**Please ensure all articles have:**\n``````', steps.frontmatter_check.outputs.error_count) }}
-          comment_tag: content-validation
-          reactions: ${{ steps.frontmatter_check.outcome == 'success' && 'thumbsup' || '' }}
-
-  build-test:
-    runs-on: ubuntu-latest
-    needs: [spellcheck, content-validation]
-    if: always()
-    name: Hugo Build Test
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: '0.128.0'
-          extended: true
-
-      - name: Build site for preview
-        id: hugo_build
-        run: hugo --buildDrafts --environment draft
-        continue-on-error: true
-
-      - name: Comment PR with build result
-        if: always()
-        uses: thollander/actions-comment-pull-request@v2
-        with:
-          message: |
-            ${{ steps.hugo_build.outcome == 'success' && '✅ **Hugo Build Successful** - The site builds correctly with these changes.' || '❌ **Hugo Build Failed** - The site failed to build with these changes. Check the workflow logs for details.' }}
-          comment_tag: build-result
-          reactions: ${{ steps.hugo_build.outcome == 'success' && 'rocket' || '' }}
-
-      - name: Upload build artifacts
-        if: steps.hugo_build.outcome == 'success'
-        uses: actions/upload-artifact@v3
-        with:
-          name: hugo-build-preview
-          path: public/
-          retention-days: 7
-
-  review-summary:
-    runs-on: ubuntu-latest
-    needs: [spellcheck, content-validation, build-test]
-    if: always()
-    name: Review Status Summary
-    
-    steps:
-      - name: Post final review status
-        uses: thollander/actions-comment-pull-request@v2
-        with:
-          message: |
-            ## ${{ (needs.spellcheck.result == 'success' && needs.content-validation.result == 'success' && needs.build-test.result == 'success') && '✅ All Checks Passed' || '⚠️ Some Checks Failed' }}
-            
-            | Check | Status |
-            |-------|--------|
-            | Spell Check | ${{ needs.spellcheck.result == 'success' && '✅ PASSED' || (needs.spellcheck.result == 'skipped' && '⏭️ SKIPPED' || '❌ FAILED') }} |
-            | Content Validation | ${{ needs.content-validation.result == 'success' && '✅ PASSED' || (needs.content-validation.result == 'skipped' && '⏭️ SKIPPED' || '❌ FAILED') }} |
-            | Hugo Build | ${{ needs.build-test.result == 'success' && '✅ PASSED' || (needs.build-test.result == 'skipped' && '⏭️ SKIPPED' || '❌ FAILED') }} |
-            
-            **Next Steps:**
-            - Fix any failing checks above
-            - Push updates to this PR
-            - Request a review from maintainers
-            - Once approved and all checks pass, merge to `main` to publish
-          comment_tag: review-summary
-          reactions: 'eyes'
