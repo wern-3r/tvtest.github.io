@@ -35,6 +35,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
+      - name: Debug Vale
+        run: |
+          ls -R .github/styles   # Zeig mir, ob die Styles da sind
+          cat .vale.ini          # Zeig mir die Config
+          ./home/runner/vale ls-config # Zeig mir, was Vale geladen hat (wenn binary da ist, sonst skip)
+
       - name: Run Vale
         uses: errata-ai/vale-action@reviewdog
         with:
@@ -43,6 +49,7 @@ jobs:
           filter_mode: nofilter
           fail_on_error: true
           level: error
+          debug: true
       # - name: LanguageTool check
       #   uses: reviewdog/action-languagetool@ea19c757470ce0dbfcbc34aec090317cef1ff0b5
       #   with:
