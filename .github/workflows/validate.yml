@@ -35,20 +35,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
-      - name: Install German Dictionary
-        run: npm install -g @cspell/dict-de-de
-
-      - name: Check Spelling
-        uses: streetsidesoftware/cspell-action@v6
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          # Prüft nur deine Content-Dateien
-          files: 'thevector/content/**/*.md'
-          # Lädt automatisch das deutsche Wörterbuch nach
-          config: 'cspell.json'
-          # Schreibt Kommentare direkt in den Code
-          inline: error
-          # Stoppt den Job bei Fehlern
-          strict: true
+          node-version: '18'
+          
+      - name: Install CSpell and German Dict
+        run: npm install -g cspell @cspell/dict-de-de
+
+      - name: Run Spellcheck
+        run: |
+          # Link the german dictionary (automatisch via cspell gefunden)
+          cspell "thevector/content/**/*.md" --language "de-DE,en" --show-suggestions
 
       # - name: LanguageTool check
       #   uses: reviewdog/action-languagetool@ea19c757470ce0dbfcbc34aec090317cef1ff0b5
