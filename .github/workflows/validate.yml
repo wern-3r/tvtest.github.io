@@ -40,7 +40,7 @@ jobs:
         with:
           files: ./thevector/content/**/*.md
           reporter: github-pr-review
-          filter_mode: filter
+          filter_mode: nofilter
           fail_on_error: true
           level: error
       # - name: LanguageTool check
