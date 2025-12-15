@@ -38,7 +38,7 @@ jobs:
       - name: Run Vale
         uses: errata-ai/vale-action@reviewdog
         with:
-          files: ./thevector/content/**/*.md
+          files: ./thevector/content/posts
           reporter: github-pr-review
           filter_mode: nofilter
           fail_on_error: true
