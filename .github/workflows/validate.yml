@@ -38,9 +38,9 @@ jobs:
       - name: Run Vale
         uses: errata-ai/vale-action@reviewdog
         with:
-          files: ./thevector/content
+          files: ./thevector/content/**/*.md
           reporter: github-pr-review
-          filter_mode: file
+          filter_mode: filter
           fail_on_error: true
           level: error
       # - name: LanguageTool check
