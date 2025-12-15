@@ -16,7 +16,7 @@ tags:
 draft: false
 author: Arne
 ---
-Test
+Test Nummer zwei, feler
 Die Europäische Kommission hat am vergangenen Donnerstag die Genehmigung für staatliche Beihilfen Deutschlands zugunsten zweier Halbleiterhersteller erteilt. Insgesamt 623 Millionen Euro dürfen als direkte Zuschüsse an GlobalFoundries in Dresden und X-FAB in Erfurt fließen. Die Kommission begründete die Entscheidung mit der Bedeutung der Projekte für die technologische Souveränität der EU und die Versorgungssicherheit im Rahmen des European Chips Act.
 
 Beide Vorhaben gelten als „First-of-a-kind“-Anlagen in Europa, was die beihilferechtliche Ausnahme nach Artikel 107(3)(c) des Vertrags über die Arbeitsweise der Europäischen Union (AEUV) ermöglicht.
