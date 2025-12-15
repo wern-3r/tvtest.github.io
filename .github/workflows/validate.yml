@@ -46,7 +46,7 @@ jobs:
       - name: Run Spellcheck
         run: |
           # Link the german dictionary (automatisch via cspell gefunden)
-          cspell "thevector/content/**/*.md" --language-id "de-DE,en" --show-suggestions
+          cspell "thevector/content/**/*.md" --language-id "de-DE" --show-suggestions
 
       # - name: LanguageTool check
       #   uses: reviewdog/action-languagetool@ea19c757470ce0dbfcbc34aec090317cef1ff0b5
