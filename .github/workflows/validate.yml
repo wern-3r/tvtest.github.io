@@ -35,14 +35,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
-      - name: LanguageTool check
-        uses: reviewdog/action-languagetool@ea19c757470ce0dbfcbc34aec090317cef1ff0b5
+      - name: Run Vale
+        uses: errata-ai/vale-action@reviewdog
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          language: de-DE
+          files: ./thevector/content
           reporter: github-pr-review
-          level: error
           filter_mode: file
+          fail_on_error: true
+          level: error
+      # - name: LanguageTool check
+      #   uses: reviewdog/action-languagetool@ea19c757470ce0dbfcbc34aec090317cef1ff0b5
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     language: de-DE
+      #     reporter: github-pr-review
+      #     level: error
+      #     filter_mode: file
 
   content-validation:
     runs-on: ubuntu-latest
@@ -54,7 +62,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check frontmatter
         run: |
-          for file in thevector/content/**/*.md; do
+          for file in ./thevector/content/**/*.md; do
             if [ -f "$file" ]; then
               for field in title date description image; do
                 if ! grep -q "^${field}:" "$file"; then
