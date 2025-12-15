@@ -36,8 +36,9 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
       - name: Run Vale
-        uses: errata-ai/vale-action@reviewdog
+        uses: errata-ai/vale-action@v2.1.1
         with:
+          token: ${{secrets.VALE_GITHUB_TOKEN}}
           files: ./thevector/content/posts
           reporter: github-pr-review
           filter_mode: nofilter
