@@ -1,0 +1,10 @@
+{
+  "version": "0.2",
+  "language": "en,de-DE",
+  "dictionaries": ["german"],
+  "ignorePaths": ["./thevector/themes/**", "./thevector/layouts/**", "*.html"],
+  "words": [
+    "Cybersecurity", "TheVector", "Homeassistant", "Traefik", 
+    "Ansible", "Podman", "Homelab"
+  ]
+}
