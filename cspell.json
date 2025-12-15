@@ -1,10 +1,16 @@
 {
   "version": "0.2",
-  "language": "en,de-DE",
-  "dictionaries": ["german"],
-  "ignorePaths": ["./thevector/themes/**", "./thevector/layouts/**", "*.html"],
+  "language": "en,de,de-DE",
+  "dictionaries": ["en_US", "de-DE", "german"],
   "words": [
-    "Cybersecurity", "TheVector", "Homeassistant", "Traefik", 
-    "Ansible", "Podman", "Homelab"
+    "Chipfabriken",
+    "Fördergelder",
+    "Halbleiterfertigung",
+    "TheVector"
+  ],
+  "ignorePaths": [
+    "./thevector/themes/**",
+    "./thevector/layouts/**",
+    "*.html"
   ]
 }

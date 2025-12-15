@@ -35,6 +35,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
+      - name: Install German Dictionary
+        run: npm install -g @cspell/dict-de
+        
       - name: Check Spelling
         uses: streetsidesoftware/cspell-action@v6
         with:
@@ -46,7 +49,7 @@ jobs:
           inline: error
           # Stoppt den Job bei Fehlern
           strict: true
-          
+
       # - name: LanguageTool check
       #   uses: reviewdog/action-languagetool@ea19c757470ce0dbfcbc34aec090317cef1ff0b5
       #   with:
