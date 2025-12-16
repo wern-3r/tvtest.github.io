@@ -2,7 +2,7 @@ matrix:
   - name: Markdown
     expect_match: false
     aspell:
-      mode: "de_DE"  # Deutsch statt 'en'
+      lang: "de_DE"  # Deutsch statt 'en'
       dictionary:
         wordlists:
           - .wordlist.txt
