@@ -2,7 +2,7 @@ matrix:
   - name: Markdown
     expect_match: false
     aspell:
-      mode: de  # Deutsch statt 'en'
+      mode: de_DE  # Deutsch statt 'en'
       dictionary:
         wordlists:
           - .wordlist.txt
@@ -23,5 +23,5 @@ matrix:
             - 'blockquote'
     sources:
       - '*.md'
-      - 'docs/**/*.md'
-      - 'content/**/*.md'
+      - 'thevector/content/**/*.md'
+ 
