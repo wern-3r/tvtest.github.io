@@ -32,31 +32,15 @@ jobs:
     name: German Spell & Grammar Check
     
     steps:
-      - name: Checkout code
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Check Spelling (German)
+        uses: rojopolis/spellcheck-github-actions@0.23.0
         with:
-          node-version: '18'
+          config_path: .spellcheck.yml
+          task_name: Markdown
           
-      - name: Install CSpell and German Dict
-        run: npm install -g cspell @cspell/dict-de-de
-
-      - name: Run Spellcheck
-        run: |
-          # Link the german dictionary (automatisch via cspell gefunden)
-          cspell "thevector/content/**/*.md" --language-id "de-DE" --show-suggestions
-
-      # - name: LanguageTool check
-      #   uses: reviewdog/action-languagetool@ea19c757470ce0dbfcbc34aec090317cef1ff0b5
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     language: de-DE
-      #     reporter: github-pr-review
-      #     level: error
-      #     filter_mode: file
-
   content-validation:
     runs-on: ubuntu-latest
     needs: check-files
