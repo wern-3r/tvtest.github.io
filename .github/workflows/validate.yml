@@ -3,7 +3,7 @@ name: PR Validation & Review
 on:
   pull_request:
     paths:
-      - './thevector/content/**/*.md'
+      - 'thevector/content/**/*.md'
       - '.wordlist.txt'
   workflow_dispatch:
 
