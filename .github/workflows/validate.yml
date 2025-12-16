@@ -3,28 +3,21 @@ name: PR Validation & Review
 on:
   pull_request:
     paths:
-      - 'thevector/content/**/*.md'
+      - './thevector/content/**/*.md'
       - '.wordlist.txt'
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pull-requests: write
-  checks: write
 
 jobs:
   spellcheck:
     runs-on: ubuntu-latest
     needs: check-files
-    if: needs.check-files.outputs.markdown == 'true' || github.event_name == 'workflow_dispatch'
     name: German Spell Check
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       
       - name: Get all changed markdown files
-        uses: tj-actions/changed-files@v45
+        uses: tj-actions/@e0021407031f5be11a464abee9a0776171c79891 # v47.0.1
         id: changed_files
         with:
           files: |
@@ -36,7 +29,14 @@ jobs:
           config_path: .spellcheck.yml
           task_name: Markdown
           source_files: ${{ steps.changed_files.outputs.all_changed_files }}
+          output_file: spellcheck-output.txt
           
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        if: '!cancelled()'
+        with:
+          name: Spellcheck Output
+          path: spellcheck-output.txt
+
   # content-validation:
   #   runs-on: ubuntu-latest
   #   needs: check-files

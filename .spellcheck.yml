@@ -21,5 +21,9 @@ matrix:
             - 'code'
             - 'pre'
             - 'blockquote'
+    sources:
+      - './thevector/content/posts/2025/*.md'
+      - '!./thevector/content/*.md'
+      - '!./thevector/content/posts/*.md'
 
  
