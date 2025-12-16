@@ -5,6 +5,7 @@ on:
     paths:
       - './thevector/content/**/*.md'
       - '.wordlist.txt'
+  workflow_dispatch:
 
 jobs:
   spellcheck:
