@@ -22,6 +22,5 @@ matrix:
             - 'pre'
             - 'blockquote'
     sources:
-      - '*.md'
       - 'thevector/content/**/*.md'
  
