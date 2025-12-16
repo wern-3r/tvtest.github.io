@@ -77,6 +77,54 @@ jobs:
         run: |
           echo "✅ Spellcheck für deutsche Markdown-Dateien abgeschlossen"
           echo "Hinweis: Bei Rechtschreibfehlern in .log-Datei nachprüfen"
+      
+            - name: Install dependencies
+        if: steps.changed-files.outputs.files != ''
+        run: |
+          pip install pyspelling aspell-python-py3
+
+      - name: Run spellcheck with detailed output
+        if: steps.changed-files.outputs.files != ''
+        id: spelling
+        run: |
+          python -m pyspelling -c .spellcheck.yml > spellcheck_output.txt 2>&1 || true
+          cat spellcheck_output.txt
+
+      - name: Parse and comment errors
+        if: always() && steps.changed-files.outputs.files != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            try {
+              const output = fs.readFileSync('spellcheck_output.txt', 'utf8');
+              
+              if (output.includes('Misspelled words')) {
+                // Parse Fehler aus Output
+                const lines = output.split('\n');
+                let errorComment = '🔍 **Rechtschreibfehler gefunden:**\n\n';
+                
+                lines.forEach(line => {
+                  if (line.match(/\w+ \(\d+\)/)) {
+                    errorComment += `- ❌ ${line}\n`;
+                  }
+                });
+                
+                errorComment += '\n**💡 Tipp:** Korrekte Wörter können zur Whitelist (`.wordlist.txt`) hinzugefügt werden.';
+                
+                // Erstelle PR-Kommentar
+                github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: errorComment
+                });
+              }
+            } catch (error) {
+              console.log('Fehler beim Parsen:', error);
+            }
+
 
 
   # check-files:
